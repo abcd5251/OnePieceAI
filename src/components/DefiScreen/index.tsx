@@ -22,6 +22,8 @@ import StakeScreen from "../StakeScreen";
 import NewsPopup from "../LatestNews";
 import { createMorphoCall } from "../../helpers/strategy";
 import AptosWalletConnectButton from "../AptosWalletAdapter";
+import { InputGenerateTransactionPayloadData } from "@aptos-labs/ts-sdk";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 const MOCK_VAUlE = BigInt(1);
 
@@ -38,39 +40,29 @@ export default function DefiScreen() {
   const [showStake, setShowStake] = useState(false);
   const [showNews, setShowNews] = useState(false);
 
+  const { account, signAndSubmitTransaction } = useWallet();
+
   async function testSign() {
-    const timestampInSeconds = Math.floor(Date.now() / 1000);
-    const deadline = BigInt(timestampInSeconds) + BigInt(PERMIT_EXPIRY);
-    const amount = MOCK_VAUlE * BigInt(USDC_DECIMAL);
+    const transactions: InputGenerateTransactionPayloadData[] = [];
+    const transaction: InputGenerateTransactionPayloadData = {
+      function:
+        "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller::deposit",
+      typeArguments: ["0x1::aptos_coin::AptosCoin"],
+      functionArguments: ["Main Account", "10000000", false],
+    };
+    transactions.push(transaction);
 
-    const signature = await signTypedData(config, {
-      domain: {
-        name: "USDC",
-        chainId: baseSepolia.id,
-        verifyingContract: USDC,
-        version: "2",
-      },
-      types: TYPES,
-      primaryType: "Permit",
-      message: {
-        owner: address!,
-        spender: EXECUTOR,
-        value: amount,
-        nonce: nonce!,
-        deadline,
+    const response = await signAndSubmitTransaction({
+      sender: account!.address,
+      data: {
+        function:
+          "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller::deposit",
+        typeArguments: ["0x1::aptos_coin::AptosCoin"],
+        functionArguments: ["Main Account", "10000000", false],
       },
     });
 
-    const calls = await createMorphoCall(address!, amount, deadline, signature);
-    console.log("Calls", calls);
-    const tx = await execution(address!, calls);
-
-    await waitForTransactionReceipt(config, {
-      hash: tx,
-    });
-
-    console.log("Tx done");
-    console.log("Call tx", tx);
+    console.log(response);
   }
 
   return (
