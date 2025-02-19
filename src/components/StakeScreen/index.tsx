@@ -104,6 +104,8 @@ export default function StakeScreen({ isOpen, onClose }: StakeScreenProps) {
       },
     });
 
+    toast.success("Transaction sent");
+
     console.log(response);
   }
 
