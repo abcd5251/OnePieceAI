@@ -22,6 +22,7 @@ import { usdcAbi } from "../../abis/usdc";
 import { execution } from "../../helpers/mock-backend";
 import { createMorphoCall } from "../../helpers/strategy";
 import { serializeAmount } from "../../helpers/utils";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 interface DepositFormData {
   deposit: {
@@ -39,52 +40,71 @@ export default function StakeScreen({ isOpen, onClose }: StakeScreenProps) {
   const { control, handleSubmit } = useForm<DepositFormData>();
   const [inputValue, setinputValue] = useState(0);
   const { address } = useAccount();
+  const { account, signAndSubmitTransaction } = useWallet();
+
+  // async function onSubmit(data: DepositFormData) {
+  //   const timestampInSeconds = Math.floor(Date.now() / 1000);
+  //   const deadline = BigInt(timestampInSeconds) + BigInt(PERMIT_EXPIRY);
+  //   const amount = serializeAmount(data.deposit.amount, USDC_DECIMAL);
+
+  //   const nonce = await readContract(config, {
+  //     abi: usdcAbi,
+  //     address: USDC,
+  //     functionName: "nonces",
+  //     args: [address!],
+  //   });
+
+  //   const signature = await signTypedData(config, {
+  //     domain: {
+  //       name: "USDC",
+  //       chainId: baseSepolia.id,
+  //       verifyingContract: USDC,
+  //       version: "2",
+  //     },
+  //     types: TYPES,
+  //     primaryType: "Permit",
+  //     message: {
+  //       owner: address!,
+  //       spender: EXECUTOR,
+  //       value: amount,
+  //       nonce: nonce!,
+  //       deadline,
+  //     },
+  //   });
+
+  //   const calls = await createMorphoCall(address!, amount, deadline, signature);
+  //   const tx = await execution(address!, calls);
+
+  //   console.log("Tx done");
+  //   console.log("Call tx", tx);
+  //   toast.promise(
+  //     waitForTransactionReceipt(config, {
+  //       hash: tx,
+  //     }),
+  //     {
+  //       pending: "Transaction is pending...",
+  //       success: `Transaction confirmed ! \n Tx hash: ${tx}`,
+  //       error: "Transaction failed",
+  //     }
+  //   );
+  // }
 
   async function onSubmit(data: DepositFormData) {
-    const timestampInSeconds = Math.floor(Date.now() / 1000);
-    const deadline = BigInt(timestampInSeconds) + BigInt(PERMIT_EXPIRY);
-    const amount = serializeAmount(data.deposit.amount, USDC_DECIMAL);
+    const amount = serializeAmount(data.deposit.amount, 10 ** 8);
 
-    const nonce = await readContract(config, {
-      abi: usdcAbi,
-      address: USDC,
-      functionName: "nonces",
-      args: [address!],
-    });
+    console.log(amount.toString());
 
-    const signature = await signTypedData(config, {
-      domain: {
-        name: "USDC",
-        chainId: baseSepolia.id,
-        verifyingContract: USDC,
-        version: "2",
-      },
-      types: TYPES,
-      primaryType: "Permit",
-      message: {
-        owner: address!,
-        spender: EXECUTOR,
-        value: amount,
-        nonce: nonce!,
-        deadline,
+    const response = await signAndSubmitTransaction({
+      sender: account!.address,
+      data: {
+        function:
+          "0x9770fa9c725cbd97eb50b2be5f7416efdfd1f1554beb0750d4dae4c64e860da3::controller::deposit",
+        typeArguments: ["0x1::aptos_coin::AptosCoin"],
+        functionArguments: ["Main Account", amount.toString(), false],
       },
     });
 
-    const calls = await createMorphoCall(address!, amount, deadline, signature);
-    const tx = await execution(address!, calls);
-
-    console.log("Tx done");
-    console.log("Call tx", tx);
-    toast.promise(
-      waitForTransactionReceipt(config, {
-        hash: tx,
-      }),
-      {
-        pending: "Transaction is pending...",
-        success: `Transaction confirmed ! \n Tx hash: ${tx}`,
-        error: "Transaction failed",
-      }
-    );
+    console.log(response);
   }
 
   if (!isOpen) return null;

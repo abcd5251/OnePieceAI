@@ -8,7 +8,7 @@ import {
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 const currencies = [
-  { id: "usdc", name: "USDC", icon: "/usdc.svg" },
+  { id: "apt", name: "APT", icon: "/apt.png" },
   { id: "usdt", name: "USDT", icon: "/usdt.svg" },
 ];
 
