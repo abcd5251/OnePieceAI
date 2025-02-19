@@ -25,7 +25,6 @@
     "@web3auth/no-modal": "^9.5.1",
     "@web3auth/openlogin-adapter": "^9.0.0-alpha.0",
     "@web3auth/web3auth-wagmi-connector": "^7.0.0",
-    "i": "^0.3.7",
     "petra-plugin-wallet-adapter": "^0.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
