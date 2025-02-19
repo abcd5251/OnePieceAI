@@ -21,6 +21,7 @@ import AIStrategy from "../AIStrategy";
 import StakeScreen from "../StakeScreen";
 import NewsPopup from "../LatestNews";
 import { createMorphoCall } from "../../helpers/strategy";
+import AptosWalletConnectButton from "../AptosWalletAdapter";
 
 const MOCK_VAUlE = BigInt(1);
 
@@ -78,7 +79,8 @@ export default function DefiScreen() {
       <div className="absolute top-0 w-full flex z-50">
         <img src="stat-titles.png" className="object-contain w-96 h-auto" />
         <div className="ml-auto mr-3 mt-3">
-          <CustomRainbowKitConnectButton />
+          <AptosWalletConnectButton />
+          {/* <CustomRainbowKitConnectButton /> */}
         </div>
       </div>
       {/* CONTENT */}

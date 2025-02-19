@@ -9,6 +9,8 @@ import { WagmiProvider, http } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./components/Layout";
 import { config } from "./config";
+import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
+import { PetraWallet } from "petra-plugin-wallet-adapter";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +42,12 @@ export default function App() {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <Layout />
+          <AptosWalletAdapterProvider
+            autoConnect={true}
+            plugins={[new PetraWallet()]}
+          >
+            <Layout />
+          </AptosWalletAdapterProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

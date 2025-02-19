@@ -1,35 +1,38 @@
 "use client";
 
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import {
   Dialog,
   DialogBackdrop,
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { useAccount } from "wagmi";
-import { baseSepolia } from "wagmi/chains";
 import { useForm, Controller } from "react-hook-form";
-import {
-  waitForTransactionReceipt,
-  signTypedData,
-  readContract,
-} from "@wagmi/core";
 import { ToastContainer, toast } from "react-toastify";
 
-import CustomRainbowKitConnectButton from "../CustomConnectButton";
+// wagmi configs
+// import { useAccount } from "wagmi";
+// import { baseSepolia } from "wagmi/chains";
+// import {
+//   waitForTransactionReceipt,
+//   signTypedData,
+//   readContract,
+// } from "@wagmi/core";
+// import CustomRainbowKitConnectButton from "../CustomConnectButton";
+// import { usdcAbi } from "../../abis/usdc";
+// import { config } from "../../config";
+// import {
+//   USDC,
+//   VAULT,
+//   USDC_DECIMAL,
+//   PERMIT_EXPIRY,
+//   TYPES,
+// } from "../../helpers/constants";
+// import { serializeAmount } from "../../helpers/utils";
+// import { deposit } from "../../helpers/mock-backend";
 import CurrencyInput from "../CurrencyInput";
-import { usdcAbi } from "../../abis/usdc";
-import { config } from "../../config";
-import {
-  USDC,
-  VAULT,
-  USDC_DECIMAL,
-  PERMIT_EXPIRY,
-  TYPES,
-} from "../../helpers/constants";
-import { serializeAmount } from "../../helpers/utils";
-import { deposit } from "../../helpers/mock-backend";
+import AptosWalletConnectButton from "../AptosWalletAdapter";
+import { useWallet } from "@aptos-labs/wallet-adapter-react";
 
 interface DepositFormData {
   deposit: {
@@ -49,56 +52,60 @@ export default function OnboardingModal({
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   setIsDeposited: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { address } = useAccount();
+  // const { address } = useAccount();
+  const { account } = useWallet();
   const { control, handleSubmit } = useForm<DepositFormData>();
+
+  // update: when wallet is connected, just hide the modal.
+  useEffect(() => {
+    if (account?.address) {
+      setIsDeposited(true);
+      setOpenModal(false);
+    }
+  }, [account]);
 
   async function onSubmit(data: DepositFormData) {
     console.log("Form submitted with values:", data);
-
-    const timestampInSeconds = Math.floor(Date.now() / 1000);
-    const deadline = BigInt(timestampInSeconds) + BigInt(PERMIT_EXPIRY);
-    const amount = serializeAmount(data.deposit.amount, USDC_DECIMAL);
-
-    const nonce = await readContract(config, {
-      abi: usdcAbi,
-      address: USDC,
-      functionName: "nonces",
-      args: [address!],
-    });
-
-    const signature = await signTypedData(config, {
-      domain: {
-        name: "USDC",
-        chainId: baseSepolia.id,
-        verifyingContract: USDC,
-        version: "2",
-      },
-      types: TYPES,
-      primaryType: "Permit",
-      message: {
-        owner: address!,
-        spender: VAULT,
-        value: amount,
-        nonce: nonce!,
-        deadline,
-      },
-    });
-
-    const tx = await deposit(address!, VAULT, amount, deadline, signature);
-    toast.promise(
-      waitForTransactionReceipt(config, {
-        hash: tx,
-      }),
-      {
-        pending: "Transaction is pending...",
-        success: `Transaction confirmed ! \n Tx hash: ${tx}`,
-        error: "Transaction failed",
-      }
-    );
-
-    await delay();
-    setIsDeposited(true);
-    setOpenModal(false);
+    //   const timestampInSeconds = Math.floor(Date.now() / 1000);
+    //   const deadline = BigInt(timestampInSeconds) + BigInt(PERMIT_EXPIRY);
+    //   const amount = serializeAmount(data.deposit.amount, USDC_DECIMAL);
+    //   const nonce = await readContract(config, {
+    //     abi: usdcAbi,
+    //     address: USDC,
+    //     functionName: "nonces",
+    //     args: [address!],
+    //   });
+    //   const signature = await signTypedData(config, {
+    //     domain: {
+    //       name: "USDC",
+    //       chainId: baseSepolia.id,
+    //       verifyingContract: USDC,
+    //       version: "2",
+    //     },
+    //     types: TYPES,
+    //     primaryType: "Permit",
+    //     message: {
+    //       owner: address!,
+    //       spender: VAULT,
+    //       value: amount,
+    //       nonce: nonce!,
+    //       deadline,
+    //     },
+    //   });
+    //   const tx = await deposit(address!, VAULT, amount, deadline, signature);
+    //   toast.promise(
+    //     waitForTransactionReceipt(config, {
+    //       hash: tx,
+    //     }),
+    //     {
+    //       pending: "Transaction is pending...",
+    //       success: `Transaction confirmed ! \n Tx hash: ${tx}`,
+    //       error: "Transaction failed",
+    //     }
+    //   );
+    //   await delay();
+    //   setIsDeposited(true);
+    //   setOpenModal(false);
   }
 
   return (
@@ -155,7 +162,7 @@ export default function OnboardingModal({
                   />
                 </div>
                 <div className="px-3 sm:px-0 text-left items-center sm:items-start max-sm:justify-between text-white flex flex-col flex-1 max-sm:min-h-[60vh] sm:pr-8">
-                  {!address ? (
+                  {true ? (
                     <>
                       {/* CONNECT WALLET PAGE */}
                       <p
@@ -178,7 +185,7 @@ export default function OnboardingModal({
                         and covering transaction fees when needed.
                       </p>
                       <div className="self-center max-sm:mt-auto mt-5">
-                        <CustomRainbowKitConnectButton />
+                        <AptosWalletConnectButton />
                       </div>
                     </>
                   ) : (

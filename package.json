@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@aptos-labs/ts-sdk": "^1.35.0",
+    "@aptos-labs/wallet-adapter-ant-design": "^3.1.0",
+    "@aptos-labs/wallet-adapter-react": "^3.8.0",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@rainbow-me/rainbowkit": "2.0.1",
@@ -22,6 +25,8 @@
     "@web3auth/no-modal": "^9.5.1",
     "@web3auth/openlogin-adapter": "^9.0.0-alpha.0",
     "@web3auth/web3auth-wagmi-connector": "^7.0.0",
+    "i": "^0.3.7",
+    "petra-plugin-wallet-adapter": "^0.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.2",
