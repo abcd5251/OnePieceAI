@@ -1,8 +1,16 @@
 # 🧩 OneVault
-Your best AI pilot to help you navigate OnChain protocol. Learn latest DeFi information by utilizing AI Agents.
+OnePieceAI is your ultimate AI-powered companion designed to simplify and enhance your experience with the Aptos OnChain protocol. Whether you're staking, lending, or exploring other DeFi strategies, OnePieceAI leverages advanced AI agents to provide you with real-time insights, automated strategies, and seamless navigation through the Aptos ecosystem.
 
-# Contract Repo
-Contract repo: https://github.com/LI-YONG-QI/agentic-hack
+# Feature
+1. AI-Powered Insights: Utilize AI agents to analyze and provide the latest DeFi trends, market data, and protocol updates.
+
+2. Effortless Staking: Automate your staking strategies on Amnis with AI-driven recommendations and execution.
+
+3. Smart Lending: Optimize your lending positions on Aries with AI agents that monitor and adjust your portfolio in real-time.
+
+4. DeFi Strategy Automation: Implement and manage complex DeFi strategies with ease, thanks to AI agents that handle the heavy lifting.
+
+5. User-Friendly Interface: Navigate the Aptos OnChain protocol with an intuitive interface designed for both beginners and advanced users.
 
 # Execution
 Install dependencies
@@ -14,14 +22,23 @@ Execution
 pnpm run start
 ```
 
-# Contract Addresses
+# Utilizing AI Agents
+OnePieceAI integrates AI agents to help you effortlessly manage your DeFi activities on Aptos. Here's how you can leverage these agents:
 
-## Base sepolia
+Amnis Staking
+Automated Staking: Set up automated staking strategies that adjust based on market conditions and your risk tolerance.
 
-- Vault [0xDC207f2D240C2bF3bbFEE32B488F7C463B1E6237](https://sepolia.basescan.org/address/0xDC207f2D240C2bF3bbFEE32B488F7C463B1E6237#code)
-- Executor [0x4Aa2cD94921a7649b4c35F9dBbEAA3f542533560](https://sepolia.basescan.org/address/0x4Aa2cD94921a7649b4c35F9dBbEAA3f542533560)
+Reward Optimization: AI agents continuously monitor and optimize your staking rewards by reallocating assets as needed.
 
-## Holesky
+Aries Lending
+Dynamic Lending: AI agents dynamically adjust your lending positions to maximize returns while minimizing risks.
 
-- Vault [0x27531720ac328E2E0336EE4F735b2A1Cc4dA3A49](https://holesky.etherscan.io/address/0x27531720ac328E2E0336EE4F735b2A1Cc4dA3A49)
-- Executor [0xd11b401c37863c74d661F96b16AF98eD8F59CEE8](https://holesky.etherscan.io/address/0xd11b401c37863c74d661F96b16AF98eD8F59CEE8)
+Risk Management: Real-time risk assessment and automated adjustments to protect your portfolio from market volatility.
+
+Other DeFi Strategies
+Portfolio Management: AI agents manage your DeFi portfolio by diversifying assets and rebalancing as needed.
+
+Strategy Execution: Implement complex DeFi strategies with ease, as AI agents handle the execution and monitoring.
+
+
+
