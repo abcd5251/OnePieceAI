@@ -41,4 +41,16 @@ Portfolio Management: AI agents manage your DeFi portfolio by diversifying asset
 Strategy Execution: Implement complex DeFi strategies with ease, as AI agents handle the execution and monitoring.
 
 
+# Transaction Hash
+Aries Lending Strategy
 
+Deposit:
+[0x09bcf1036c66868e5980e45e806e9ee3141068b170a7881666038800f90e9f4f](https://explorer.aptoslabs.com/txn/0x09bcf1036c66868e5980e45e806e9ee3141068b170a7881666038800f90e9f4f?network=mainnet)
+
+Withdraw:
+[0xebd02ac68d21d41d4d18985ea45c0ff7aca8b899efd30e0e3b353a22363f06e4](https://explorer.aptoslabs.com/txn/2388090151?network=mainnet)
+
+Amnis Staking Strategy
+
+Staking:
+[0x774c62390c74fd3065bd83ee464122487f94214114163621749811c78f443a4a](https://aptoscan.com/transaction/0x774c62390c74fd3065bd83ee464122487f94214114163621749811c78f443a4a?network=mainnet)
