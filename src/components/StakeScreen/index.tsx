@@ -131,8 +131,40 @@ export default function StakeScreen({ isOpen, onClose }: StakeScreenProps) {
 
           {/* Body */}
           <div className="mt-4 flex flex-col">
-            <img src="/Stake/information.svg" className="h-18" />
-            <img src="/Stake/intro.svg" className="h-10 mt-10" />
+            <p
+              className="text-xl text-center"
+              style={{
+                textShadow: " -2px 2.5px 0px #000000",
+                WebkitTextFillColor: "white",
+                WebkitTextStroke: "0.4px black",
+              }}
+            >
+              Ready for this Strategy? Let's stake!
+            </p>
+            <div className="mt-4 flex items-center gap-x-2 justify-center">
+              <div className="flex items-center">
+                <img src="/aries/aries-logo-white.png" className="h-8" />
+                <p className="bg-black pl-2 pr-3">ARIES MARKET </p>
+              </div>
+              <div className="flex justify-start items-center">
+                <img src="/heart-icon.png" className="h-8 z-2"></img>
+                <p className="bg-black ml-[-5px] pl-2 pr-3">
+                  APY:
+                  <span className="text-[#C689FF]">3.72%</span>
+                </p>
+              </div>
+              <div>
+                <p className="bg-black ml-[-5px] pl-2 pr-3 text-[#33FF6C]">
+                  LOW RISK
+                </p>
+              </div>
+            </div>
+            <div className="mt-4">
+              <p>
+                Once you confirm, your funds will be allocated automatically. No
+                extra steps—just sit back and let the AI optimize for you
+              </p>
+            </div>
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="w-full flex flex-col gap-y-3"
