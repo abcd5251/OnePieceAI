@@ -32,10 +32,7 @@ export default function StrategyPopup({ isOpen, onClose, setShowAIStrategy, setS
             <div className="flex justify-center items-center border-b border-white pb-2">
               <div className='items-center' >
               <span className='text-3xl inline-block'>🛡️</span>
-              <img 
-                src="/morpho/eventInfo.svg" 
-                className="h-6 inline-block"
-              />
+               Lending Strategy
               </div>
               <img 
                 src="/morpho/cancel.svg" 

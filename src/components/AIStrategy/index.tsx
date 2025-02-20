@@ -114,7 +114,7 @@ export default function AIStrategy({
                       setInputText("How does Morpho's lending work?")
                     }
                   >
-                    How does Morpho's lending work?
+                    What is Amnis Finance?
                   </button>
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
@@ -124,7 +124,7 @@ export default function AIStrategy({
                       )
                     }
                   >
-                    What makes the Gauntlet WETH Prime Vault different?
+                    What is Cellana Finance's Total APR for stAPT?
                   </button>
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
@@ -132,7 +132,7 @@ export default function AIStrategy({
                       setInputText("How is the 3.72% APY calculated?")
                     }
                   >
-                    How is the 3.72% APY calculated?
+                    How is the Amnis staking APY calculated?
                   </button>
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
@@ -140,7 +140,7 @@ export default function AIStrategy({
                       setInputText("What risks should I be aware of?")
                     }
                   >
-                    What risks should I be aware of?
+                    What risks should I be aware of ?
                   </button>
                 </div>
               </>

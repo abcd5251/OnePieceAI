@@ -98,12 +98,17 @@ async def process_simple_input(data: InputData):
     query_embedding = get_embedding(data.input_text)
     total_information = search_from_qdrant(qclient, query_embedding, k=8)
     need_info = ""
-    for infor in total_information:
-        need_info += infor.payload["content"]
-        need_info += "\n"
+    # for infor in total_information:
+    #     need_info += infor.payload["content"]
+    #     need_info += "\n"
+    with open("./data/information.txt") as f:
+        contents = f.read()
+    need_info = contents
     qa_model_instance = OpenAIModel(system_prompt=qa_prompt, temperature=0)
     prompt = f"INFORMATION:{need_info}\nQUESTION:{data.input_text}\nOUTPUT:"
     output, input_token, output_token = qa_model_instance.generate_string_text(prompt)
+
+    
     
     print("Answer", output)
     return {"result": output}
