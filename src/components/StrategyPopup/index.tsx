@@ -47,21 +47,50 @@ export default function StrategyPopup({
 
           {/* Body */}
           <div className="mt-4 relative">
-            <img src="/morpho/Morpho.svg" className="h-10 mb-4 inline-block" />
-            <img
-              src="/morpho/mark.svg"
-              className="h-8 mb-4 ml-2 inline-block cursor-pointer"
-              onClick={() => setShowMorpho(!showMorpho)}
-            />
-            {showMorpho && (
-              <img
-                src="/morpho/morphoShow.svg"
-                className="absolute -top-48 right-6 "
-              />
-            )}
-            <a href="https://app.morpho.org/vault/?vault=897a21a1-45">
-              <img src="/morpho/intro.svg" className="h-40 " />
-            </a>
+            <div className="flex justify-start items-center">
+              <img src="/aries/aries-logo-white.png" className="h-10" />
+              <h3
+                className="text-3xl ml-2"
+                style={{
+                  textShadow: " -2.5px 2px 0px #000000",
+                  WebkitTextFillColor: "white",
+                  WebkitTextStroke: "0.2px black",
+                }}
+              >
+                Aries Markets
+              </h3>
+            </div>
+
+            <div className="mt-4 flex justify-start items-center">
+              <img src="/link-icon.png" className="h-8 z-2"></img>
+              <p className="bg-black ml-[-5px] pl-2 pr-3">
+                https://app-mobile.ariesmarkets.xyz
+              </p>
+            </div>
+
+            <div className="mt-4">
+              <p>
+                Aries Markets is a decentralized exchange built on Move, it aims
+                to aggregate and simplify the user experience across all of
+                DeFi.
+              </p>
+            </div>
+
+            <div className="mt-4 flex items-center gap-x-2">
+              <div className="flex justify-start items-center">
+                <img src="/heart-icon.png" className="h-8 z-2"></img>
+                <p className="bg-black ml-[-5px] pl-2 pr-3">
+                  APY:
+                  <span className="text-[#C689FF]">3.72%</span>
+                </p>
+              </div>
+
+              <div>
+                <p className="bg-black ml-[-5px] pl-2 pr-3 text-[#33FF6C]">
+                  LOW RISK
+                </p>
+              </div>
+            </div>
 
             {/* Action Section */}
             <div className="flex flex-col items-center gap-y-2">
