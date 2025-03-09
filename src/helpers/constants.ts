@@ -21,3 +21,8 @@ export const TYPES = {
 } as const satisfies TypedData;
 
 export const PERMIT_EXPIRY = 60000;
+
+// TODO: Switch chain easily
+
+//! Sonic chian
+export const BEETS = '0xE5DA20F15420aD15DE0fa650600aFc998bbE3955';

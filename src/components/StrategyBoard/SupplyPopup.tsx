@@ -1,26 +1,13 @@
 import { useForm, Controller } from 'react-hook-form';
-import { baseSepolia } from 'wagmi/chains';
-import { useAccount } from 'wagmi';
-import {
-  waitForTransactionReceipt,
-  signTypedData,
-  readContract,
-} from '@wagmi/core';
+import { useWriteContract } from 'wagmi';
+import { waitForTransactionReceipt } from '@wagmi/core';
 import { ToastContainer, toast } from 'react-toastify';
 
-import {
-  EXECUTOR,
-  USDC,
-  USDC_DECIMAL,
-  PERMIT_EXPIRY,
-  TYPES,
-} from '../../helpers/constants';
+import { BEETS } from '../../helpers/constants';
 import CurrencyInput from '../ui/CurrencyInput';
 import { config } from '../../config';
-import { usdcAbi } from '../../abis/usdc';
-import { execution } from '../../helpers/mock-backend';
-import { createMorphoCall } from '../../helpers/strategy';
-import { serializeAmount } from '../../helpers/utils';
+import { parseEther } from 'viem';
+import { beetsAbi } from '../../abis/beets';
 
 interface DepositFormData {
   deposit: {
@@ -36,40 +23,18 @@ interface SupplyPopupProps {
 
 export default function SupplyPopup({ isOpen, onClose }: SupplyPopupProps) {
   const { control, handleSubmit } = useForm<DepositFormData>();
-  const { address } = useAccount();
+  const { writeContractAsync } = useWriteContract();
 
   async function onSubmit(data: DepositFormData) {
-    const timestampInSeconds = Math.floor(Date.now() / 1000);
-    const deadline = BigInt(timestampInSeconds) + BigInt(PERMIT_EXPIRY);
-    const amount = serializeAmount(data.deposit.amount, USDC_DECIMAL);
+    const { deposit } = data;
+    const amount = parseEther(deposit.amount);
 
-    const nonce = await readContract(config, {
-      abi: usdcAbi,
-      address: USDC,
-      functionName: 'nonces',
-      args: [address!],
+    const tx = await writeContractAsync({
+      abi: beetsAbi,
+      address: BEETS,
+      functionName: 'deposit',
+      value: amount,
     });
-
-    const signature = await signTypedData(config, {
-      domain: {
-        name: 'USDC',
-        chainId: baseSepolia.id,
-        verifyingContract: USDC,
-        version: '2',
-      },
-      types: TYPES,
-      primaryType: 'Permit',
-      message: {
-        owner: address!,
-        spender: EXECUTOR,
-        value: amount,
-        nonce: nonce!,
-        deadline,
-      },
-    });
-
-    const calls = await createMorphoCall(address!, amount, deadline, signature);
-    const tx = await execution(address!, calls);
 
     toast.promise(
       waitForTransactionReceipt(config, {
