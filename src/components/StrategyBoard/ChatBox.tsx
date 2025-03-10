@@ -109,32 +109,32 @@ export default function ChatBox({
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
-                      setInputText("How does Morpho's lending work?")
+                      setInputText("What is the key advantage of x(3,3) over ve(3,3)?")
                     }>
-                    How does Morpho&apos;s lending work?
+                    What is the key advantage of x(3,3) over ve(3,3)?
                   </button>
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
                       setInputText(
-                        'What makes the Gauntlet WETH Prime Vault different?',
+                        'How do users participate in Shadow Exchange governance?',
                       )
                     }>
-                    What makes the Gauntlet WETH Prime Vault different?
+                    How do users participate in Shadow Exchange governance?
                   </button>
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
-                      setInputText('How is the 3.72% APY calculated?')
+                      setInputText('What are the two main tokens in Shadow Exchange?')
                     }>
-                    How is the 3.72% APY calculated?
+                    What are the two main tokens in Shadow Exchange?
                   </button>
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
-                      setInputText('What risks should I be aware of?')
+                      setInputText('How does Shadow Exchange lower gas fees?')
                     }>
-                    What risks should I be aware of?
+                    How does Shadow Exchange lower gas fees?
                   </button>
                 </div>
               </>
