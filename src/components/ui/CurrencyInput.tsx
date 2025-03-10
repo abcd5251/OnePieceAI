@@ -7,7 +7,9 @@ import {
 } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
-const currencies = [{ id: 'S', name: 'S', icon: '/S_token.svg' }];
+const currencies = [
+  { id: 'stS', name: 'stS', icon: '/shadow/token-beets-staked-sonic.webp' },
+];
 
 interface Props {
   onChange?: (value: { currency: string; amount: string }) => void;

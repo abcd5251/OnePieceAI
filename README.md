@@ -31,3 +31,8 @@ pnpm run start
 
 - Vault [0x27531720ac328E2E0336EE4F735b2A1Cc4dA3A49](https://holesky.etherscan.io/address/0x27531720ac328E2E0336EE4F735b2A1Cc4dA3A49)
 - Executor [0xd11b401c37863c74d661F96b16AF98eD8F59CEE8](https://holesky.etherscan.io/address/0xd11b401c37863c74d661F96b16AF98eD8F59CEE8)
+
+## Sonic
+
+- Vault deployed at: 0x07086bAE06BDEC2DbaD7D7aeE0559E8868c29903
+- Executor deployed at: 0xbB6Aed42b49e427FeA6048715e0a1E4F9cFfacA6
