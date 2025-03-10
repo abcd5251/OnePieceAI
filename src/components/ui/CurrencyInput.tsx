@@ -8,7 +8,8 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
 const currencies = [
-  { id: 'stS', name: 'stS', icon: '/shadow/token-beets-staked-sonic.webp' },
+  { id: 'S', name: 'S', icon: 'S_token.svg' },
+  { id: 'stS', name: 'stS', icon: '/shadow/token-beets-staked-sonic.webp' }
 ];
 
 interface Props {
