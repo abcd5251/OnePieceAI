@@ -3,11 +3,11 @@
 import type { Address, Hex } from 'viem';
 import { createWalletClient, http } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
-import { baseSepolia } from 'viem/chains';
+import { sonic } from 'viem/chains';
 import { parseSignature } from 'viem';
 
 import { executorAbi } from '../abis/executor';
-import { EXECUTOR, VAULT } from './constants';
+import { SONIC_EXECUTOR, VAULT } from './constants';
 import { vaultAbi } from '../abis/vault';
 
 const account = privateKeyToAccount(
@@ -15,7 +15,7 @@ const account = privateKeyToAccount(
 );
 
 const adminWallet = createWalletClient({
-  chain: baseSepolia,
+  chain: sonic,
   transport: http(),
   account,
 });
@@ -51,7 +51,7 @@ export async function execution(user: Address, calls: Call[]) {
   //! remove const assertion on executorAbi
   const tx = await adminWallet.writeContract({
     abi: executorAbi,
-    address: EXECUTOR,
+    address: SONIC_EXECUTOR,
     functionName: 'execute',
     args: [calls, user],
   });

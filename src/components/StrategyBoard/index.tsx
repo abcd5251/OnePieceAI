@@ -6,13 +6,23 @@ import ChatBox from './ChatBox';
 import StakeScreen from './SupplyPopup';
 import NewsPopup from './NewsPopup';
 
-import { MidRisk, LowRisk, HighRisk } from '../strategies';
+import { MidRisk, LowRisk, HighRisk } from './strategies';
+import BeetsPopup from './BeetsPopup';
+import BeetStakePopup from './BeetsStakePopup';
+import ShadowPopup from './ShadowPopup';
+import ShadowStakePopup from './ShadowStakePopup';
 
 export default function StrategyBoard() {
   const [showPopup, setShowPopup] = useState(false);
   const [showChatBox, setShowChatBox] = useState(false);
   const [showStake, setShowStake] = useState(false);
   const [showNews, setShowNews] = useState(false);
+
+  const [showBeetsPopup, setShowBeetsPopup] = useState(false);
+  const [showBeetsStakePopup, setShowBeetsStakePopup] = useState(false);
+
+  const [showShadowPopup, setShowShadowPopup] = useState(false);
+  const [showShadowStakePopup, setShowShadowStakePopup] = useState(false);
 
   return (
     <div className="relative bg-[url('/defi-background.png')] bg-cover bg-center bg-no-repeat h-screen w-full overflow-y-scroll">
@@ -23,7 +33,6 @@ export default function StrategyBoard() {
           <CustomRainbowKitConnectButton />
         </div>
       </div>
-
       {/* CONTENT */}
       <div className="relative flex items-center justify-center h-full flex-col">
         <div
@@ -44,15 +53,14 @@ export default function StrategyBoard() {
           </div>
 
           <div className="flex justify-between gap-x-2">
-            <LowRisk />
+            <LowRisk setShowPopup={setShowBeetsPopup} />
 
             <MidRisk setShowPopup={setShowPopup} />
 
-            <HighRisk setShowPopup={setShowPopup}/>
+            <HighRisk setShowPopup={setShowShadowPopup} />
           </div>
         </div>
       </div>
-
       {/* FOOTER, fixed at the bottom */}
       <div className="absolute bottom-0 w-full flex items-center justify-center pb-3">
         <div className="flex justify-center items-end gap-x-3 ml-2">
@@ -128,7 +136,6 @@ export default function StrategyBoard() {
           </button>
         </div>
       </div>
-
       <StrategyPopup
         isOpen={showPopup}
         onClose={() => setShowPopup(false)}
@@ -136,14 +143,35 @@ export default function StrategyBoard() {
         setShowPopup={setShowPopup}
         setShowStake={setShowStake}
       />
+      <BeetsPopup
+        isOpen={showBeetsPopup}
+        onClose={() => setShowBeetsPopup(false)}
+        setShowAIStrategy={setShowChatBox}
+        setShowPopup={setShowBeetsPopup}
+        setShowStake={setShowBeetsStakePopup}
+      />
+      <ShadowPopup
+        isOpen={showShadowPopup}
+        onClose={() => setShowShadowPopup(false)}
+        setShowAIStrategy={setShowChatBox}
+        setShowPopup={setShowShadowPopup}
+        setShowStake={setShowShadowStakePopup}
+      />
       <ChatBox
         isOpen={showChatBox}
         onClose={() => setShowChatBox(false)}
         setShowChatBox={setShowChatBox}
         setShowPopup={setShowPopup}
       />
-
       <StakeScreen isOpen={showStake} onClose={() => setShowStake(false)} />
+      <BeetStakePopup
+        isOpen={showBeetsStakePopup}
+        onClose={() => setShowBeetsStakePopup(false)}
+      />
+      <ShadowStakePopup
+        isOpen={showShadowStakePopup}
+        onClose={() => setShowShadowStakePopup(false)}
+      />
       <NewsPopup
         isOpen={showNews}
         onClose={() => setShowNews(false)}
