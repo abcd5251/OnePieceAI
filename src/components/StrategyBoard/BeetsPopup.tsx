@@ -56,10 +56,7 @@ export default function BeetsPopup({
               onClick={() => setShowMorpho(!showMorpho)}
             />
             {showMorpho && (
-              <img
-                src="/morpho/morphoShow.svg"
-                className="absolute -top-48 right-6 "
-              />
+              <img src="/beets/des.svg" className="absolute -top-48 right-6 " />
             )}
             <a href="https://app.morpho.org/vault/?vault=897a21a1-45">
               <img src="/beets/intro.svg" className="h-40 " />
