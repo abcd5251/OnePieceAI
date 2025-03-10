@@ -48,7 +48,7 @@ export default function StrategyBoard() {
 
             <MidRisk setShowPopup={setShowPopup} />
 
-            <HighRisk />
+            <HighRisk setShowPopup={setShowPopup}/>
           </div>
         </div>
       </div>

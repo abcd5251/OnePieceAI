@@ -1,11 +1,16 @@
-export function HighRisk() {
+interface RighRiskProps {
+  setShowPopup: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export function HighRisk({ setShowPopup }: RighRiskProps) {
   return (
-    <div className="w-1/3 border-2 border-black cursor-pointer hover:scale-105 transition-all duration-300">
+    <div 
+    onClick={() => {
+      setShowPopup(true);
+      console.log('High-Risk Strategy');
+    }}
+    className="w-1/3 border-2 border-black cursor-pointer hover:scale-105 transition-all duration-300">
       <div
-        onClick={() => {
-          // TODO
-          console.log('High-Risk Strategy');
-        }}
         className="text-right text-[#7583A4] bg-black">
         <p>High-Risk Strategy</p>
       </div>
