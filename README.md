@@ -3,9 +3,9 @@
 Your Personal DeFAI Agent — a fully autonomous system that executes, optimizes, and adapts DeFi strategies based on your risk preferences. let user can easily interact with Sonic DeFi protocol and earn points for airdrop
 
 # Contract Repository
-Sonic Multicall: https://github.com/LI-YONG-QI/agentic-hack/blob/main/src/Multicall3.sol
-Sonic test: https://github.com/LI-YONG-QI/agentic-hack/blob/main/test/Beets.t.sol
-Contract repo: https://github.com/LI-YONG-QI/agentic-hack
+Sonic Multicall: https://github.com/LI-YONG-QI/agentic-hack/blob/main/src/Multicall3.sol  
+Sonic test: https://github.com/LI-YONG-QI/agentic-hack/blob/main/test/Beets.t.sol  
+Contract repo: https://github.com/LI-YONG-QI/agentic-hack  
 
 # Contract Addresses
 
