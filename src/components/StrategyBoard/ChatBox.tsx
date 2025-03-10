@@ -109,7 +109,9 @@ export default function ChatBox({
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
-                      setInputText("What is the key advantage of x(3,3) over ve(3,3)?")
+                      setInputText(
+                        'What is the key advantage of x(3,3) over ve(3,3)?',
+                      )
                     }>
                     What is the key advantage of x(3,3) over ve(3,3)?
                   </button>
@@ -125,7 +127,9 @@ export default function ChatBox({
                   <button
                     className="bg-blue-400 p-2 rounded-lg text-xs text-white"
                     onClick={() =>
-                      setInputText('What are the two main tokens in Shadow Exchange?')
+                      setInputText(
+                        'What are the two main tokens in Shadow Exchange?',
+                      )
                     }>
                     What are the two main tokens in Shadow Exchange?
                   </button>

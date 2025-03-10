@@ -1,13 +1,20 @@
 import { useForm, Controller } from 'react-hook-form';
-import { useWriteContract } from 'wagmi';
-import { waitForTransactionReceipt } from '@wagmi/core';
+import { useAccount, useReadContract } from 'wagmi';
+import { usdcAbi } from '../../abis/usdc';
+import { waitForTransactionReceipt, signTypedData } from '@wagmi/core';
 import { ToastContainer, toast } from 'react-toastify';
 
-import { BEETS } from '../../helpers/constants';
+import {
+  stS,
+  PERMIT_EXPIRY,
+  TYPES,
+  SONIC_EXECUTOR,
+} from '../../helpers/constants';
 import CurrencyInput from '../ui/CurrencyInput';
 import { config } from '../../config';
-import { parseEther } from 'viem';
-import { beetsAbi } from '../../abis/beets';
+import { sonic } from 'viem/chains';
+import { execution } from '../../helpers/mock-backend';
+import { createSwapCall } from '../../helpers/strategy';
 
 interface DepositFormData {
   deposit: {
@@ -26,18 +33,49 @@ export default function ShadowStakePopup({
   onClose,
 }: SupplyPopupProps) {
   const { control, handleSubmit } = useForm<DepositFormData>();
-  const { writeContractAsync } = useWriteContract();
+  // const { writeContractAsync } = useWriteContract();
+
+  const { address } = useAccount();
+  const { data: nonce } = useReadContract({
+    abi: usdcAbi,
+    address: stS,
+    functionName: 'nonces',
+    args: [address!],
+  });
 
   async function onSubmit(data: DepositFormData) {
     const { deposit } = data;
-    const amount = parseEther(deposit.amount);
+    const timestampInSeconds = Math.floor(Date.now() / 1000);
+    const deadline = BigInt(timestampInSeconds) + BigInt(PERMIT_EXPIRY);
+    const amount = BigInt(deposit.amount) * BigInt(1e18);
 
-    const tx = await writeContractAsync({
-      abi: beetsAbi,
-      address: BEETS,
-      functionName: 'deposit',
-      value: amount,
+    const signature = await signTypedData(config, {
+      domain: {
+        name: 'Beets Staked Sonic',
+        chainId: sonic.id,
+        verifyingContract: stS,
+        version: '1',
+      },
+      types: TYPES,
+      primaryType: 'Permit',
+      message: {
+        owner: address!,
+        spender: SONIC_EXECUTOR,
+        value: amount,
+        nonce: nonce!,
+        deadline,
+      },
     });
+
+    const calls = await createSwapCall(address!, amount, deadline, signature);
+    const tx = await execution(address!, calls);
+
+    await waitForTransactionReceipt(config, {
+      hash: tx,
+    });
+
+    console.log('Tx done');
+    console.log('Call tx', tx);
 
     toast.promise(
       waitForTransactionReceipt(config, {

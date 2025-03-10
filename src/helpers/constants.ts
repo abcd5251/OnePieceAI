@@ -26,3 +26,6 @@ export const PERMIT_EXPIRY = 60000;
 
 //! Sonic chian
 export const BEETS = '0xE5DA20F15420aD15DE0fa650600aFc998bbE3955';
+export const stS = '0xe5da20f15420ad15de0fa650600afc998bbe3955';
+export const SONIC_EXECUTOR = '0xbB6Aed42b49e427FeA6048715e0a1E4F9cFfacA6';
+export const ROUTER = '0x92643dc4f75c374b689774160cdea09a0704a9c2';
